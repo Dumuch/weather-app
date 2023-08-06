@@ -13,9 +13,11 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
     const cityList = ref<City[]>([]);
 
     async function addCity(city: AddCity) {
-        cityList.value.push({ id: city.id, lat: city.lat, lng: city.lng, name: city.name, weather: null });
-        await fetchWeather()
-        updateStorage()
+        if (!cityList.value.find(city => city.id === city.id)) {
+            cityList.value.push({ id: city.id, lat: city.lat, lng: city.lng, name: city.name, weather: null });
+            await fetchWeather()
+            updateStorage()
+        }
     }
 
     function deleteCity(id: number) {
@@ -68,5 +70,12 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
         updateStorage()
     }
 
-    return { cityList, addCity, deleteCity, getCityFromLocalStorage, findCityByCityName, fetchWeather, newOrder }
+    async function addCityByLatLng(lat: number, lng: number) {
+        const data = await api.get('', { lat: lat,  lon: lng }) as WeatherData;
+        if (data) {
+            await addCity({ id: data.id, lat: lat, lng: lng, name: data.name })
+        }
+    }
+
+    return { cityList, addCity, deleteCity, getCityFromLocalStorage, findCityByCityName, fetchWeather, newOrder, addCityByLatLng }
 })

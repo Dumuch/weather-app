@@ -1,8 +1,10 @@
 <template>
     <div class="weather-widget">
-        <button class="settings-toggle" :class="isOpenSettings ? 'settings-toggle_open' : ''" @click="toggleSettings"><span class="settings-toggle__burger"></span>Open settings</button>
-        <settings v-if="isOpenSettings"/>
-        <city-list v-else/>
+        <button class="settings-toggle" :class="isOpenSettings ? 'settings-toggle_open' : ''" @click="toggleSettings">
+            <span class="settings-toggle__burger"></span>Open settings
+        </button>
+        <settings v-if="isOpenSettings" />
+        <city-list v-else />
     </div>
 </template>
 
@@ -10,10 +12,11 @@
 import CityList from '@/components/city-list-component.vue';
 import { Geocoder } from '@/service/geocoder/index.ts';
 import Settings from '@/components/settings-component.vue';
-import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
+import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore.ts';
+import { storeToRefs } from 'pinia/dist/pinia';
 
 export default {
-    name: "WeatherWidget",
+    name: 'WeatherWidget',
     data() {
         return {
             isOpenSettings: false
@@ -21,22 +24,31 @@ export default {
     },
     components: { Settings, CityList },
     setup() {
-        const store = useWeatherWidgetStore()
-        return { store }
+        const weatherWidgetStore = useWeatherWidgetStore()
+        const { cityList } = storeToRefs(weatherWidgetStore)
+
+        return { weatherWidgetStore, cityList }
     },
     async mounted() {
-        this.store.getCityFromLocalStorage()
-        await this.store.fetchWeather()
-        try {
-           const geocoder = new Geocoder();
-           const test = await geocoder.getCurrentPosition();
-        } catch (e) {}
+        this.weatherWidgetStore.getCityFromLocalStorage()
+        await this.weatherWidgetStore.fetchWeather()
+        if (this.cityList.length === 0) {
+            try {
+                const geocoder = new Geocoder();
+                const currentWeatherCity = await geocoder.getCurrentPosition();
+                await this.weatherWidgetStore.addCityByLatLng(
+                    currentWeatherCity.coords.latitude,
+                    currentWeatherCity.coords.longitude,
+                )
+            } catch (e) {
+            }
+        }
     },
 
     methods: {
         toggleSettings() {
             this.isOpenSettings = !this.isOpenSettings
-        }
+        },
     }
 };
 </script>

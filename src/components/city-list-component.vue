@@ -1,14 +1,14 @@
 <template>
     <div class="city-list-container">
         <ul class="city-list">
-            <li v-for="(city, i) in store.cityList" :key="city.id">
+            <li v-for="city in store.cityList" :key="city.id">
                 <div class="city-item__header">
-                    {{ city.name }}, {{ city.weather.sys.country }}
+                    {{ city.name }}, {{ city.weather?.sys.country }}
                 </div>
-                <div class="city-item__body">
+                <div v-if="city.weather" class="city-item__body">
                     <div class="city-item__temperature">
                         <img :src="`https://openweathermap.org/img/wn/${city.weather.weather[0].icon}@2x.png`"
-                             class="temperature-image" width="100" height="100" :alt="city.weather.name" />
+                             class="temperature-image" width="100" height="100" :alt="city.weather?.name" />
                         <span class="temperature-number">{{ convertTemp(city.weather.main.temp) }}°C</span>
                     </div>
                     <div class="city-item__feel-like">
