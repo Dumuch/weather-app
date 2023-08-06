@@ -59,7 +59,7 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
             }
             return city
         })
-
+        updateStorage()
     }
 
     function newOrder(array: City[]) {

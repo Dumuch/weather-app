@@ -1,6 +1,4 @@
 <template>
-  <header>Weather Widget</header>
-
   <main>
     <weather-widget />
   </main>

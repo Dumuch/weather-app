@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="weather-widget">
+<!--        <settings/>-->
         <city-list/>
-        <settings/>
     </div>
 </template>
 
@@ -31,3 +31,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.weather-widget {
+    width: 300px;
+    max-width: 100%;
+}
+</style>
