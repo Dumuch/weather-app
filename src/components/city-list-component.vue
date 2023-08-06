@@ -78,6 +78,14 @@ export default {
     margin-bottom: 15px;
 }
 
+.city-item:first-child {
+    margin-top: 0;
+}
+
+.city-item:last-child {
+    margin-bottom: 0;
+}
+
 .city-item__header {
     font-weight: bold;
     font-size: 1rem;
