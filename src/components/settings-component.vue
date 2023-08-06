@@ -6,7 +6,7 @@
                 <SlickItem class="city-item" v-for="(city, i) in weatherWidgetStore.cityList" :key="city.id" :index="i">
                     <div class="city-item__burger-button"></div>
                     <div class="city-item__name">
-                        {{ city.name }}, {{ city.weather?.sys.country }}
+                        {{ city.name }}, {{ city.weatherData?.sys.country }}
                     </div>
                     <button class="city-item__delete-button" @click="deleteCity(city.id)">delete</button>
                 </SlickItem>
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
+import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore.ts';
 import { convertTempKelvinToCelsius } from '@/utils/helpers.ts';
 import { SlickList, SlickItem } from 'vue-slicksort';
 
@@ -46,6 +46,11 @@ export default {
             isLoading: false,
         }
     },
+    setup() {
+        const weatherWidgetStore = useWeatherWidgetStore()
+        return { weatherWidgetStore }
+    },
+
     methods: {
         deleteCity(cityId) {
             this.weatherWidgetStore.deleteCity(cityId)
@@ -81,10 +86,7 @@ export default {
             }
         }
     },
-    setup() {
-        const weatherWidgetStore = useWeatherWidgetStore()
-        return { weatherWidgetStore }
-    },
+
 };
 </script>
 

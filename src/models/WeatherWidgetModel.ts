@@ -1,13 +1,9 @@
-
-export interface WeatherWidgetStore {
-    findCityByCityName(cityName: string)
-}
 export interface City {
     id: number;
     lat: number;
     lng: number;
     name: string;
-    weather: WeatherData | null;
+    weatherData: WeatherData | null;
 }
 
 export interface AddCity {

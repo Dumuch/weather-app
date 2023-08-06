@@ -14,7 +14,7 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
 
     async function addCity(newCity: AddCity) {
         if (!cityList.value.find(city => city.id === newCity.id)) {
-            cityList.value.push({ id: newCity.id, lat: newCity.lat, lng: newCity.lng, name: newCity.name, weather: null });
+            cityList.value.push({ id: newCity.id, lat: newCity.lat, lng: newCity.lng, name: newCity.name, weatherData: null });
             await fetchWeather()
             updateStorage()
         }
@@ -58,7 +58,7 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
         cityList.value = cityList.value.map(city => {
             const weather = citiesWeather.find(cityWeather => cityWeather.id === city.id)
             if (weather) {
-                city.weather = weather
+                city.weatherData = weather
             }
             return city
         })
