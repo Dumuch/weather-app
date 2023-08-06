@@ -1,7 +1,7 @@
 <template>
     <div class="city-list-container">
         <ul class="city-list">
-            <li v-for="city in store.cityList" :key="city.id">
+            <li class="city-item" v-for="city in store.cityList" :key="city.id">
                 <div class="city-item__header">
                     {{ city.name }}, {{ city.weather?.sys.country }}
                 </div>
@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .city-list {
     display: flex;
@@ -71,6 +71,11 @@ export default {
     flex-direction: column;
     margin: 0;
     padding: 0;
+}
+
+.city-item {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .city-item__header {

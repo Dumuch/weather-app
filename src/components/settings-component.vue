@@ -70,13 +70,15 @@ export default {
             }
         },
         addCity() {
-            this.currentWeatherCity && this.weatherWidgetStore.addCity({
-                id: this.currentWeatherCity.id,
-                lat: this.currentWeatherCity.coord.lat,
-                lng: this.currentWeatherCity.coord.lon,
-                name: this.currentWeatherCity.name
-            })
-            this.cityName = '';
+            if (this.currentWeatherCity) {
+                this.weatherWidgetStore.addCity({
+                    id: this.currentWeatherCity.id,
+                    lat: this.currentWeatherCity.coord.lat,
+                    lng: this.currentWeatherCity.coord.lon,
+                    name: this.currentWeatherCity.name
+                })
+                this.cityName = '';
+            }
         }
     },
     setup() {
@@ -86,7 +88,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .settings {
     position: absolute;
     top: 0;
