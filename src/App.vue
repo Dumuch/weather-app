@@ -1,15 +1,20 @@
 <template>
-  <header>
-
-    <div class="wrapper">
-        opop[op[
-    </div>
-  </header>
+  <header>Weather Widget</header>
 
   <main>
+    <weather-widget />
   </main>
-    op[op[
 </template>
+
+
+<script>
+import WeatherWidget from '@/components/weather-widget-component.vue';
+
+export default {
+    name: "App",
+    components: { WeatherWidget },
+}
+</script>
 
 <style scoped lang="scss">
 
