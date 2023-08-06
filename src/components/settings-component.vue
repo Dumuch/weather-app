@@ -19,7 +19,7 @@
                 <span class="add-city__error-message" v-if="isNotFound && cityName.length !== 0">Not found</span>
             </div>
             <div class="add-city__body">
-                <input class="add-city__input" v-model="cityName" @input="findCity" />
+                <input class="add-city__input" v-model="cityName" />
                 <button class="add-city__button" :disabled="isNotFound || isLoading" @click="addCity">Add</button>
             </div>
         </div>
@@ -45,6 +45,7 @@ export default {
             currentWeatherCity: null as WeatherData | null,
             cityName: '',
             isLoading: false,
+            searchTimer: null as any,
         }
     },
     setup() {
@@ -53,7 +54,7 @@ export default {
     },
 
     methods: {
-        deleteCity(cityId : number) {
+        deleteCity(cityId: number) {
             this.weatherWidgetStore.deleteCity(cityId)
         },
         convertTemp(temp: number) {
@@ -75,6 +76,7 @@ export default {
                 this.isLoading = false;
             }
         },
+
         addCity() {
             if (this.currentWeatherCity) {
                 this.weatherWidgetStore.addCity({
@@ -87,6 +89,23 @@ export default {
             }
         }
     },
+    watch: {
+        cityName(nv) {
+            if (this.searchTimer) {
+                clearTimeout(this.searchTimer);
+                this.searchTimer = null;
+            }
+            if (nv.length === 0) {
+                return;
+            }
+
+            this.searchTimer = setTimeout(() => {
+                this.searchTimer = null;
+                this.findCity()
+            }, 300)
+
+        },
+    }
 
 };
 </script>

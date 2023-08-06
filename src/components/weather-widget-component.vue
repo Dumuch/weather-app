@@ -4,7 +4,12 @@
             <span class="settings-toggle__burger"></span>Open settings
         </button>
         <settings v-if="isOpenSettings" />
-        <city-list v-else />
+        <template v-else>
+            <p v-if="cityList.length === 0">
+                City not added
+            </p>
+            <city-list v-else />
+        </template>
     </div>
 </template>
 
