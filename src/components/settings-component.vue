@@ -28,9 +28,10 @@
 </template>
 
 <script lang="ts">
-import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore.ts';
-import { convertTempKelvinToCelsius } from '@/utils/helpers.ts';
+import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
+import { convertTempKelvinToCelsius } from '@/utils/helpers';
 import { SlickList, SlickItem } from 'vue-slicksort';
+import type { City, WeatherData } from '@/models/WeatherWidgetModel';
 
 export default {
     name: 'Settings',
@@ -41,7 +42,7 @@ export default {
     data() {
         return {
             isNotFound: true,
-            currentWeatherCity: null,
+            currentWeatherCity: null as WeatherData | null,
             cityName: '',
             isLoading: false,
         }
@@ -52,13 +53,13 @@ export default {
     },
 
     methods: {
-        deleteCity(cityId) {
+        deleteCity(cityId : number) {
             this.weatherWidgetStore.deleteCity(cityId)
         },
-        convertTemp(temp) {
+        convertTemp(temp: number) {
             return convertTempKelvinToCelsius(temp)
         },
-        updateSort(newOrder) {
+        updateSort(newOrder: City[]) {
             this.weatherWidgetStore.newOrder(newOrder)
         },
         async findCity() {

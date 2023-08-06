@@ -1,4 +1,4 @@
-import type { GeolocationPosition } from '@/service/geocoder/types.ts';
+import type { GeolocationPosition } from '@/service/geocoder/types';
 
 export class Geocoder {
     async getCurrentPosition() {

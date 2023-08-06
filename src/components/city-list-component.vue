@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="city-item__wind">
-                        <img src="src/assets/navigation.png" class="wind-image" width="20" height="20"
+                        <img src="/src/assets/navigation.png" class="wind-image" width="20" height="20"
                              alt="navigation icon" />
                         {{ city.weatherData.wind.speed }}m/s SSE
                     </div>
@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
-import { capitalized, convertTempKelvinToCelsius, metersToKm } from '@/utils/helpers.ts';
+import { capitalized, convertTempKelvinToCelsius, metersToKm } from '@/utils/helpers';
 
 export default {
     name: 'CityList',
@@ -50,13 +50,13 @@ export default {
         return { store }
     },
     methods: {
-        convertTemp(temp) {
+        convertTemp(temp: number) {
             return convertTempKelvinToCelsius(temp)
         },
-        capitalized(str) {
+        capitalized(str: string) {
             return capitalized(str)
         },
-        metersToKm(meters) {
+        metersToKm(meters: number) {
             return metersToKm(meters)
         }
     }
