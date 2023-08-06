@@ -1,9 +1,8 @@
 <template>
     <div>
-
         <div class="city-list">
-            <SlickList axis="y" v-model:list="store.cityList" @update:list="updateSort">
-                <SlickItem v-for="(city, i) in store.cityList" :key="city.id" :index="i">
+            <SlickList axis="y" v-model:list="weatherWidgetStore.cityList" @update:list="updateSort">
+                <SlickItem v-for="(city, i) in weatherWidgetStore.cityList" :key="city.id" :index="i">
                     <div class="city-item__header">
                         {{ city.name }}, {{ city.weather.sys.country }}
                     </div>

@@ -74,7 +74,6 @@ export default {
 .city-item__header {
     font-weight: bold;
     font-size: 1rem;
-    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
