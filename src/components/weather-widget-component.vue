@@ -2,7 +2,7 @@
     <div class="weather-widget">
         <button class="settings-toggle" :class="isOpenSettings ? 'settings-toggle_open' : ''" @click="toggleSettings"><span class="settings-toggle__burger"></span>Open settings</button>
         <settings v-if="isOpenSettings"/>
-        <city-list/>
+        <city-list v-else/>
     </div>
 </template>
 
@@ -43,6 +43,8 @@ export default {
 
 <style lang="scss">
 .weather-widget {
+    margin-top: 50px;
+    margin-bottom: 50px;
     position: relative;
     width: 300px;
     max-width: 100%;
@@ -58,6 +60,9 @@ export default {
     width: 30px;
     padding: 0;
     background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+
 }
 
 .settings-toggle__burger,
@@ -70,6 +75,8 @@ export default {
     width: 30px;
     transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
     border-radius: 2px;
+    cursor: pointer;
+
 }
 
 .settings-toggle__burger::before {

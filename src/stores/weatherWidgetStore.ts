@@ -12,8 +12,9 @@ const api = new Api('https://api.openweathermap.org/data/2.5/weather?appid=2b9d9
 export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
     const cityList = ref<City[]>([]);
 
-    function addCity(city: AddCity) {
+    async function addCity(city: AddCity) {
         cityList.value.push({ id: city.id, lat: city.lat, lng: city.lng, name: city.name, weather: null });
+        await fetchWeather()
         updateStorage()
     }
 

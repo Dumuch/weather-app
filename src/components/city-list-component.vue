@@ -69,6 +69,8 @@ export default {
     display: flex;
     list-style: none;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 .city-item__header {
