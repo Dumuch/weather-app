@@ -20,8 +20,14 @@ export default {
     },
     async mounted() {
         this.store.getCityFromLocalStorage()
-       const geocoder = new Geocoder();
-       const test = await geocoder.getCurrentPosition();
+        await this.store.fetchWeather()
+        try {
+           const geocoder = new Geocoder();
+           const test = await geocoder.getCurrentPosition();
+
+        } catch (e) {
+
+        }
     }
 };
 </script>

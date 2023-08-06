@@ -7,9 +7,11 @@ export interface City {
     lat: number;
     lng: number;
     name: string;
+    weather: WeatherData | null;
 }
 
 export interface AddCity {
+    id: number;
     lat: number;
     lng: number;
     name: string;
