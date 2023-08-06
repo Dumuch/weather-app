@@ -45,7 +45,7 @@ export default {
             currentWeatherCity: null as WeatherData | null,
             cityName: '',
             isLoading: false,
-            searchTimer: null as any,
+            searchTimer: null as ReturnType<typeof setTimeout>  | null,
         }
     },
     setup() {
