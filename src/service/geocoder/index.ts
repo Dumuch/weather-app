@@ -6,8 +6,4 @@ export class Geocoder {
             navigator.geolocation.getCurrentPosition(resolve, reject);
         } )
     }
-
-    findCity(cityName) {
-
-    }
 }
