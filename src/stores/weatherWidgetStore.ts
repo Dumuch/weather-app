@@ -62,5 +62,10 @@ export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
 
     }
 
-    return { cityList, addCity, deleteCity, getCityFromLocalStorage, findCityByCityName, fetchWeather }
+    function newOrder(array: City[]) {
+        cityList.value = array
+        updateStorage()
+    }
+
+    return { cityList, addCity, deleteCity, getCityFromLocalStorage, findCityByCityName, fetchWeather, newOrder }
 })

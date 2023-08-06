@@ -1,21 +1,26 @@
 <template>
     <div>
-        <ul>
-            <li v-for="city in store.cityList " :key="city.id">
+        <SlickList axis="y" v-model:list="store.cityList" @update:list="updateSort">
+            <SlickItem v-for="(city, i) in store.cityList" :key="city.id" :index="i">
                 {{ city.name }}
                 {{city.weather && convertTemp(city.weather.main.temp)}}
                 <button @click="deleteCity(city.id)">delete</button>
-            </li>
-        </ul>
+            </SlickItem>
+        </SlickList>
     </div>
 </template>
 
 <script lang="ts">
 import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
 import { convertTempKelvinToCelsius } from '@/utils/helpers.ts';
+import { SlickList, SlickItem } from 'vue-slicksort';
 
 export default {
     name: 'CityList',
+    components: {
+        SlickList,
+        SlickItem,
+    },
     setup() {
         const store = useWeatherWidgetStore()
         return { store }
@@ -26,6 +31,9 @@ export default {
         },
         convertTemp(temp) {
             return convertTempKelvinToCelsius(temp)
+        },
+        updateSort(newOrder) {
+            this.store.newOrder(newOrder)
         }
     }
 };
