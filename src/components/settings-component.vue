@@ -2,9 +2,13 @@
     <div class="settings">
         <div class="settings-header">Settings</div>
         <div class="settings__city-list">
-            <SlickList class="city-list" axis="y" v-model:list="weatherWidgetStore.cityList" @update:list="updateSort">
+            <SlickList class="city-list" axis="y" v-model:list="weatherWidgetStore.cityList" @update:list="updateSort" useDragHandle="true">
                 <SlickItem class="city-item" v-for="(city, i) in weatherWidgetStore.cityList" :key="city.id" :index="i">
-                    <div class="city-item__burger-button"></div>
+                    <DragHandle>
+                        <div class="city-item__wrapper-burger-button">
+                            <div class="city-item__burger-button"></div>
+                        </div>
+                    </DragHandle>
                     <div class="city-item__name">
                         {{ city.name }}, {{ city.weatherData?.sys.country }}
                     </div>
@@ -30,7 +34,7 @@
 <script lang="ts">
 import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
 import { convertTempKelvinToCelsius } from '@/utils/helpers';
-import { SlickList, SlickItem } from 'vue-slicksort';
+import { SlickList, SlickItem, DragHandle } from 'vue-slicksort';
 import type { City, WeatherData } from '@/models/WeatherWidgetModel';
 
 export default {
@@ -38,6 +42,7 @@ export default {
     components: {
         SlickList,
         SlickItem,
+        DragHandle
     },
     data() {
         return {
@@ -140,10 +145,19 @@ export default {
     margin-bottom: 0.5rem;
 }
 
+.city-item__wrapper-burger-button {
+    width: 15px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+.city-item__burger-button {
+    top: 9px
+}
+
 .city-item__burger-button,
 .city-item__burger-button::before,
 .city-item__burger-button::after {
-    cursor: pointer;
     display: block;
     background-color: var(--vt-c-black);
     position: absolute;
