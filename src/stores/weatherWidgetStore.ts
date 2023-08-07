@@ -7,7 +7,7 @@ import type { WeatherData } from '@/models/WeatherWidgetModel';
 import { LocalStorage } from '@/service/localStorage';
 
 const CITY_LIST_KEY = 'cityList'
-const api = new Api('https://api.openweathermap.org/data/2.5/weather?appid=2b9d95b2380238ead959af9d5ef04d31');
+const api = new Api('https://api.openweathermap.org/data/2.5/weather?appid=' + import.meta.env.VITE_OPENWEATHERMAP_ORG_KEY);
 
 export const useWeatherWidgetStore = defineStore('weatherWidget', () => {
     const cityList = ref<City[]>([]);
