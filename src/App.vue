@@ -1,7 +1,5 @@
 <template>
-  <main>
     <weather-widget />
-  </main>
 </template>
 
 
