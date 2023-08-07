@@ -60,8 +60,7 @@ export default {
 
 <style lang="scss">
 .weather-widget {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin: 50px auto;
     position: relative;
     width: 300px;
     max-width: 100%;
