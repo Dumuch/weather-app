@@ -9,10 +9,10 @@
                     <div class="city-item__temperature">
                         <img :src="`https://openweathermap.org/img/wn/${city.weatherData.weather[0].icon}@2x.png`"
                              class="temperature-image" width="100" height="100" :alt="city.weatherData?.name" />
-                        <span class="temperature-number">{{ convertTemp(city.weatherData.main.temp) }}°C</span>
+                        <span class="temperature-number">{{ convertTemp(city.weatherData?.main.temp) }}°C</span>
                     </div>
                     <div class="city-item__feel-like">
-                        Feels like {{ convertTemp(city.weatherData.main.feels_like) }}°C.
+                        Feels like {{ convertTemp(city.weatherData?.main.feels_like) }}°C.
                         <template v-for="(item, i) in city.weatherData.weather" :key="i">
                             {{ capitalized(item.description) }}.
                         </template>
@@ -21,15 +21,15 @@
                     <div class="city-item__wind">
                         <img src="/src/assets/navigation.png" class="wind-image" width="20" height="20"
                              alt="navigation icon" />
-                        {{ city.weatherData.wind.speed }}m/s SSE
+                        {{ city.weatherData?.wind.speed }}m/s SSE
                     </div>
 
                     <div class="city-item__humidity">
-                        Humidity: {{ city.weatherData.main.humidity }}%
+                        Humidity: {{ city.weatherData?.main.humidity }}%
                     </div>
 
                     <div class="city-item__visibility">
-                        Visibility: {{ metersToKm(city.weatherData.visibility) }}km
+                        Visibility: {{ metersToKm(city.weatherData?.visibility) }}km
                     </div>
 
                 </div>
