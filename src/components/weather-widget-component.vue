@@ -4,16 +4,16 @@
             <span class="settings-toggle__burger"></span>Open settings
         </button>
         <settings v-if="isOpenSettings" />
-        <template v-else>
+        <div v-show="!isOpenSettings">
             <p v-if="cityList.length === 0">
                 City not added
             </p>
             <city-list v-else />
-        </template>
+        </div>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import CityList from '@/components/city-list-component.vue';
 import { Geocoder } from '@/service/geocoder/index.ts';
 import Settings from '@/components/settings-component.vue';
@@ -24,7 +24,7 @@ export default {
     name: 'WeatherWidget',
     data() {
         return {
-            isOpenSettings: false
+            isOpenSettings: false,
         }
     },
     components: { Settings, CityList },

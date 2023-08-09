@@ -2,7 +2,7 @@
     <div class="settings">
         <div class="settings-header">Settings</div>
         <div class="settings__city-list">
-            <SlickList class="city-list" axis="y" v-model:list="weatherWidgetStore.cityList" @update:list="updateSort" useDragHandle="true">
+            <SlickList class="city-list" axis="y" v-model:list="weatherWidgetStore.cityList" @update:list="updateSort" :useDragHandle="true">
                 <SlickItem class="city-item" v-for="(city, i) in weatherWidgetStore.cityList" :key="city.id" :index="i">
                     <DragHandle>
                         <div class="city-item__wrapper-burger-button">
@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            isNotFound: true,
+            isNotFound: true as boolean,
             currentWeatherCity: null as WeatherData | null,
             cityName: '',
             isLoading: false,
