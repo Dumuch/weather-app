@@ -15,9 +15,9 @@
 
 <script lang="ts">
 import CityList from '@/components/city-list-component.vue';
-import { Geocoder } from '@/service/geocoder/index.ts';
+import { Geocoder } from '@/service/geocoder';
 import Settings from '@/components/settings-component.vue';
-import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore.ts';
+import { useWeatherWidgetStore } from '@/stores/weatherWidgetStore';
 import { storeToRefs } from 'pinia/dist/pinia';
 
 export default {
